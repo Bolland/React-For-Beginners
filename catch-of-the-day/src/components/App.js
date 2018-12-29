@@ -61,7 +61,7 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Order />
+        <Order fishes={this.state.fishes} order={this.state.order} /> {/** alternative: pass whole state object with spread: <Order {...this.state} />); better: pass down explicitly */}
         {/** passing method down to addFishForm */}
         <Inventory
           addFish={this.addFish}
