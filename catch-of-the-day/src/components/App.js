@@ -33,13 +33,32 @@ class App extends React.Component {
     this.setState({ fishes: sampleFishes });
   };
 
+  addToOrder = key => {
+    // 1. take a copy of state
+    const order = { ...this.state.order };
+
+    // 2. Either add to order or update number of order
+    // if ƒish exists, add 1, otherwise set to 1
+    order[key] = order[key] + 1 || 1;
+
+    // 3. set new order state
+    this.setState({ order });
+  };
+
   render() {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh seafood market" />
           <ul className="fishes">
-            {Object.keys(this.state.fishes).map(key => <Fish key={key} details={this.state.fishes[key]} />)}
+            {Object.keys(this.state.fishes).map(key => (
+              <Fish
+                key={key}
+                index={key}
+                details={this.state.fishes[key]}
+                addToOrder={this.addToOrder}
+              />
+            ))}
           </ul>
         </div>
         <Order />
