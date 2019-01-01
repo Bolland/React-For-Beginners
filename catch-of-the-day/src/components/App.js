@@ -17,11 +17,26 @@ class App extends React.Component {
 
    componentDidMount() {
       const { params } = this.props.match;
+      //reinstate localStorage
+      const localStorageRef = localStorage.getItem(params.storeId);
+
+      //if saved local storage exists, set order state to object (parse creates object from JSON string)
+      if (localStorageRef) {
+         this.setState({ order: JSON.parse(localStorageRef) });
+      }
+
       //different ref than the input refs from forms.
       this.ref = base.syncState(`${params.storeId}/fishes`, {
          context: this,
          state: "fishes"
       });
+   }
+
+   componentDidUpdate() {
+      localStorage.setItem(
+         this.props.match.params.storeId,
+         JSON.stringify(this.state.order) // convert object to string to avoid "[object Object]"" output
+      );
    }
 
    //Stop listening for changes to avoid memory overflow
