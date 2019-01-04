@@ -1,0 +1,61 @@
+import React from "react";
+
+class EditFishForm extends React.Component {
+   handleChange = event => {
+      // giving a name to input fields allows dynmic access to input fields
+      console.log(event.currentTarget.name);
+
+      console.log(event.currentTarget.value);
+      //update that fish
+      //1. Take copy of current fish
+      const updatedFish = {
+         ...this.props.fish,
+         [event.currentTarget.name]: event.currentTarget.value //make generic dynamic changes
+      };
+
+      this.props.updateFish(this.props.index, updatedFish);
+      console.log(updatedFish);
+   };
+   render() {
+      return (
+         <div className="fish-edit">
+            <input
+               type="text"
+               name="name"
+               onChange={this.handleChange}
+               value={this.props.fish.name}
+            />
+            <input
+               type="text"
+               name="price"
+               onChange={this.handleChange}
+               value={this.props.fish.price}
+            />
+            <select
+               type="text"
+               name="status"
+               onChange={this.handleChange}
+               valueue={this.props.fish.status}>
+               <option value="avaiable">Fresh!</option>
+               <option value="unavailable">Sold out!</option>
+            </select>
+            <textarea
+               name="desc"
+               onChange={this.handleChange}
+               value={this.props.fish.desc}
+            />
+            <input
+               type="text"
+               name="image"
+               onChange={this.handleChange}
+               value={this.props.fish.image}
+            />
+            <button onClick={() => this.props.deleteFish(this.props.index)}>
+               Remove Fish
+            </button>
+         </div>
+      );
+   }
+}
+
+export default EditFishForm;
