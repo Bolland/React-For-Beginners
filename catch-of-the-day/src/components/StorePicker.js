@@ -1,6 +1,7 @@
 // Component schema: Import, class definition, export.
 
 import React from "react";
+import PropTypes from "prop-types";
 import { getFunName } from "../helpers";
 
 class StorePicker extends React.Component {
@@ -10,6 +11,10 @@ class StorePicker extends React.Component {
    //     console.log('Create component');
    //     this.goToStore = this.goToStore.bind(this);
    // }
+
+   static propTypes = {
+      history: PropTypes.object
+   };
 
    myInput = React.createRef();
 
